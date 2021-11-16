@@ -189,11 +189,6 @@ data Derivation =
 
 n1 = Apply (Lambda "x" (Variable "x")) (Variable "y")
 
-test = Lambda "x" (Apply (Lambda "x" (Variable "x")) (Variable "x"))
-
-helperzz = Apply  (Apply (Variable "x") (Variable "z"))   (Apply (Variable "y") (Variable "z"))
-examplefromlecture = Lambda "x" (Lambda "y" (Lambda "z" helperzz))
-
 n2 = Apply (Lambda "x" (Lambda "y" (Lambda "z" (Apply (Variable "x") (Variable "z"))))) (Apply (Variable "y") (Variable "z"))
 
 
