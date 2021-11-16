@@ -75,12 +75,15 @@ t3 :: Type
 t3 = At "a" :-> At "c" :-> At "c"
 
 
-------------------------- Assignment 1
+
+--Function that determines if an atom occurs in a type
 
 occurs :: Atom -> Type -> Bool
 occurs a (At x) = a == x 
 occurs a (t :-> z) = occurs a t || occurs a z
 
+--Function that returns the atoms occurring in a type in an
+-- (alphabetically) ordered list.
 
 findAtoms :: Type -> [Atom]
 findAtoms (At x) = [x]
@@ -102,7 +105,8 @@ s3 :: Sub
 s3 = ("c", At "a" :-> At "a")
 
 
-------------------------- Assignment 2
+
+-- Applies a substitution to a type
 
 sub :: Sub -> Type -> Type
 sub (a, t) (At x)
@@ -110,6 +114,9 @@ sub (a, t) (At x)
  | otherwise = At x
 sub (a, t) (y :-> z) = sub (a, t) y :-> sub (a, t) z
 
+
+-- A function that applies a list of substitutions to a type, with the head
+-- of the list applied last, and the tail applied first.
 
 subs :: [Sub] -> Type -> Type
 subs [] t = t
@@ -137,7 +144,6 @@ st1 :: State
 st1 = ([],[u1,u2])
 
 
-------------------------- Assignment 3
 
 sub_u :: Sub -> [Upair] -> [Upair]
 sub_u s lst = [sub_upair s x| x  <- lst]
@@ -170,7 +176,6 @@ unify u = transition (initialState u)
     transition (s, u) = transition (step (s, u)) 
 
 
-------------------------- Assignment 4
 
 type Context   = [(Var, Type)]
 type Judgement = (Context,Term,Type)
@@ -285,7 +290,6 @@ instance Show Derivation where
 
 
 
-------------------------- Assignment 5
 
 derive0 :: Term -> Derivation
 derive0 t =  aux (makeCtx (free t),t, At "") 
